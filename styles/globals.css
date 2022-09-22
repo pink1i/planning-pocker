@@ -1,26 +1,42 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.PictureBox {
+  background: linear-gradient(45deg, #3993ff 12%, transparent 0, transparent 88%, #3993ff 0), linear-gradient(135deg, transparent 37%, #1a7bf2 0, #1a7bf2 63%, transparent 0), linear-gradient(45deg, transparent 37%, #3993ff 0, #3993ff 63%, transparent 0), #74b3ff;
+  background-size: 17px 17px;
+  height: 100%;
+  width: 100%;
+  border-radius: 8px;
+  transition: all .1s;
+  transform: rotateY(180deg);
+  z-index: 5;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.CardValue {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-* {
-  box-sizing: border-box;
+.CardHoder {
+  transition: all .6s;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
+.CardItem {
+  backface-visibility: hidden
+}
+
+.CardFliped {
+  transform: rotateY(0deg);
+}
+
+.perspective {
+  perspective: 100px
 }

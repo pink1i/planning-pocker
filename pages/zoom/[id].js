@@ -295,6 +295,7 @@ const Zoom = ({ zoomId, zoomName, needPass }) => {
   return (
     <div className="bg-gray-50 h-screen flex justify-center items-center">
       <div>
+        <h1 className="text-xl">Zoom of <span className="font-bold">{zoomName}</span></h1>
         <div className="pk-area grid grid-rows-3 grid-cols-3 gap-5">
           <div className="flex items-center justify-center min-h-[150px] min-w-[250px]"></div>
           <div className="flex items-center justify-center min-h-[150px] min-w-[250px]">
@@ -467,13 +468,24 @@ export async function getServerSideProps({ query }) {
   const res = await fetch(
     `${process.env.SERVER || "http://localhost:3000"}/api/zoom/${id}`
   );
-  const { zoomName, needPass } = await res.json();
+  console.log(res.status)
+  if (res.status == 200 ) {
+    const { zoomName, needPass } = await res.json();
+    return {
+      props: {
+        zoomId: id,
+        zoomName,
+        needPass,
+      },
+    };
+  } else {
+    return {
+      redirect: {
+        destination: '/401',
+        permanent: false
+      }
+    }
+  }
 
-  return {
-    props: {
-      zoomId: id,
-      zoomName,
-      needPass,
-    },
-  };
+
 }

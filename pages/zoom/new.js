@@ -29,7 +29,7 @@ const NewZoom = () => {
   const onSubmit = async (formdata) => {
     const res = await fetch("/api/zoom", { method: "POST", body: JSON.stringify(formdata), headers: { 'Content-Type': 'application/json'} });
     const { z, n } = await res.json();
-    Router.push(`/zoom/${z}-${n}`);
+    Router.push(`/zoom/${n}-${z}`);
   };
 
   return (

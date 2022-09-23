@@ -6,14 +6,21 @@ const handler = nc()
 handler
   .get(async (req, res) => {
     const { id } = req.query
-    const [iv, content] = id.split("-")
-    const decoded = decrypt({ iv , content})
-    const [zoomName, password] = decoded.split("::")
-
-    res.json({
-      zoomName,
-      needPass: password.length > 0
-    })
+    const [content, iv] = id.split("-")
+    try {
+      const decoded = decrypt({ iv , content})
+      const [zoomName, password] = decoded.split("::")
+      console.log(12, zoomName, password)
+      res.json({
+        zoomName,
+        needPass: password.length > 0
+      })
+    } catch (error) {
+      console.log(error)
+      res.status(401).json({
+        message: "Unauthention"
+      })
+    }
   })
   .post(async (req, res) => {
     const { id } = req.query
